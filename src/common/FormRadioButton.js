@@ -24,8 +24,6 @@ export const FormRadioButton = ({
   name,
 
   label,
-  errors,
-  helperText,
 }) => {
   const { control } = useFormContext;
   const {
