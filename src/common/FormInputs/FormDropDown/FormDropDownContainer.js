@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { FormDropdown } from "./FormDropDown";
+import { MenuItem } from "@mui/material";
 import { useController } from "react-hook-form";
-
 const options = [
   {
     label: "Python developer",
@@ -22,8 +16,7 @@ const options = [
     value: "Php Developer",
   },
 ];
-
-export const FormDropdown = ({ name, control, label, helperText }) => {
+const FormDropDownContainer = ({ name, label }) => {
   const {
     field: { onChange, value },
     fieldState: { error },
@@ -39,16 +32,16 @@ export const FormDropdown = ({ name, control, label, helperText }) => {
       );
     });
   };
-
   return (
-    <FormControl size="small" error={!!error} style={{ width: "200px" }}>
-      <InputLabel>{label}</InputLabel>
-      <>
-        <Select onChange={onChange} value={value} label={label}>
-          {generateSingleOptions()}
-        </Select>
-        <FormHelperText>{error?.message}</FormHelperText>
-      </>
-    </FormControl>
+    <FormDropdown
+      generateSingleOptions={generateSingleOptions}
+      options={options}
+      onChange={onChange}
+      value={value}
+      error={error}
+      label={label}
+    />
   );
 };
+
+export default FormDropDownContainer;

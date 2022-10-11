@@ -1,4 +1,4 @@
-import MultiStepForm from "./module/Form/MultiStepFormContainer";
+import MultiStepForm from "./module/UserProfileForm/UserProfileFormSteps/UserMultiStepForm/UserMultiStepFormContainer";
 import "./styles.css";
 
 export default function App() {

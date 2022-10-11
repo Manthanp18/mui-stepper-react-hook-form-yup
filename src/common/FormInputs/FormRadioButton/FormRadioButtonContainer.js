@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  FormLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
+import { FormRadioButton } from "./FormRadioButton";
 import { Controller, useController, useFormContext } from "react-hook-form";
+import { FormControlLabel, Radio } from "@mui/material";
 
 const options = [
   {
@@ -19,12 +13,7 @@ const options = [
     value: "Temporary Address",
   },
 ];
-
-export const FormRadioButton = ({
-  name,
-
-  label,
-}) => {
+const FormRadioButtonContainer = ({ name }) => {
   const { control } = useFormContext;
   const {
     field: { onChange, value },
@@ -43,17 +32,15 @@ export const FormRadioButton = ({
       />
     ));
   };
-
   return (
-    <FormControl error={!!error} style={{ marginTop: " 20px" }}>
-      <FormLabel>{label}</FormLabel>
-
-      <>
-        <RadioGroup value={value} onChange={onChange}>
-          {generateRadioOptions()}
-        </RadioGroup>
-        <FormHelperText>{error?.message}</FormHelperText>
-      </>
-    </FormControl>
+    <FormRadioButton
+      generateRadioOptions={generateRadioOptions}
+      control={control}
+      onChange={onChange}
+      value={value}
+      error={error}
+    />
   );
 };
+
+export default FormRadioButtonContainer;

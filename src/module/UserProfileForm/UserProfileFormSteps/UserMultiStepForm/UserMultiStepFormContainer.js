@@ -13,13 +13,12 @@ import {
 import * as yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Step1 from "../steps/PersonalDetail";
-import Step2 from "../steps/AddressDetail";
-import Step3 from "../steps/JobDetail";
+import Step1 from "../UserPersonalDetailForm";
+import Step2 from "../UserAddressDetailForm";
+import Step3 from "../UserJobDetailForm";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
-
-
+import UserMultiStepform from "./UserMultiStepform";
 
 const defaultValues = {
   firstName: "",
@@ -132,63 +131,16 @@ export default function MultiStepForm() {
   };
 
   return (
-    <Container
-      style={{
-        display: "grid",
-        width: "100%",
-        gridRowGap: "20px",
-        padding: "100px",
-        // height: "600px",
-      }}>
-      <Paper elevation={1} style={{ padding: "40px" }}>
-        <Stepper activeStep={activeStep} style={{ padding: "10px" }}>
-          {steps.map((label, index) => {
-            const stepProps = {};
-            const labelProps = {};
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
-        <div style={{ minHeight: "50%" }}>
-          {activeStep === steps.length ? (
-            <>
-              <Button onClick={handleReset}>Reset</Button>
-            </>
-          ) : (
-            <FormProvider {...methods}>
-              <form>
-                <div>{getStepContent(activeStep)}</div>
-                <Box
-                  display="flex"
-                  justifyContent="center"
-                  style={{ paddingTop: "5vh" }}>
-                  <Button disabled={activeStep === 0} onClick={handleBack}>
-                    Back
-                  </Button>
-                  {activeStep === steps.length - 1 ? (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleSubmit(onSubmit)}>
-                      Submit
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}>
-                      Next
-                    </Button>
-                  )}
-                </Box>
-              </form>
-            </FormProvider>
-          )}
-        </div>
-      </Paper>
-    </Container>
+    <UserMultiStepform
+      activeStep={activeStep}
+      methods={methods}
+      handleReset={handleReset}
+      handleNext={handleNext}
+      handleBack={handleBack}
+      steps={steps}
+      getStepContent={getStepContent}
+      onSubmit={onSubmit}
+      handleSubmit={handleSubmit}
+    />
   );
 }
